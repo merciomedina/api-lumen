@@ -53,11 +53,11 @@ class SimulatorController extends BaseController
     }
 
     function getCEP($cep) {
-        $client = new Client([
+        $clientCEP = new Client([
             'base_uri' => $this->cepUrl
         ]); 
 
-        $response = $client->request('GET', $cep. '/json');                
+        $response = $clientCEP->request('GET', $cep. '/json');                
 
         if ($response->getStatusCode() != 200){            
             return "error";
@@ -77,9 +77,9 @@ class SimulatorController extends BaseController
     function getGoogleAddress($address) {        
         $adressGoogle = $address->logradouro . "," . $address->localidade . "," . $address->uf;
 
-        $client2 = new Client(['base_uri' => $this->baseUrlGoogle . 'address='. $adressGoogle . '&key=' . $this->apiKey]);
+        $clientAddress = new Client(['base_uri' => $this->baseUrlGoogle . 'address='. $adressGoogle . '&key=' . $this->apiKey]);
       
-        $response = $client2->request('GET');
+        $response = $clientAddress->request('GET');
         
         $body = $response->getBody();
         $body_string = (string) $body ; 
@@ -103,9 +103,9 @@ class SimulatorController extends BaseController
         $lng  = $address->lng;
         $city = $address->localidade;        
 
-        $client3 = new Client(['base_uri' => $this->baseUrl . '&estrutura='. $str . '&valor_conta='. $account . '&cidade='. $city . '&estado='. $uf . '&cep='. $cep . '&latitude='. $lat . '&longitude='. $lng]);
+        $clientData = new Client(['base_uri' => $this->baseUrl . '&estrutura='. $str . '&valor_conta='. $account . '&cidade='. $city . '&estado='. $uf . '&cep='. $cep . '&latitude='. $lat . '&longitude='. $lng]);
         
-        $response = $client3->request('GET');
+        $response = $clientData->request('GET');
         $result = $response->getBody();
  
         return $result;
