@@ -20,7 +20,7 @@ class SimulatorController extends BaseController
         $this->baseUrl = "https://api2.77sol.com.br/busca-cep?";
         $this->cepUrl  = 'viacep.com.br/ws/';
         $this->baseUrlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?";
-        $this->apiKey = "AIzaSyBXR8barLfeXOmbc0-USwpSsWCMBAJGJDQ";
+        $this->apiKey = ''; // Informar a chave Google API
     }
 
     public function handle(Request $request) {   
